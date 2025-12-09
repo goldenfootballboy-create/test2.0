@@ -12,6 +12,19 @@ os.chdir(script_dir)
 
 st.set_page_config(page_title="YIP SHING Project Status Dashboard", layout="wide", initial_sidebar_state="expanded")
 
+# Checklist 狀態
+CHECKLIST_FILE = "checklist_data.json"
+if os.path.exists(CHECKLIST_FILE):
+    with open(CHECKLIST_FILE, "r", encoding="utf-8") as f:
+        saved_checklist = json.load(f)
+else:
+    saved_checklist = {}
+
+def save_checklist():
+    with open(CHECKLIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(st.session_state.checklist, f, ensure_ascii=False, indent=2)
+
+# -------------------------------------------------
 # 2. 完整 CSS（保持你原本的）
 # -------------------------------------------------
 st.markdown("""
